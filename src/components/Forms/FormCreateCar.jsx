@@ -1,15 +1,21 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, FloatingLabel } from "react-bootstrap";
 
 function FormCreateCar() {
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Registra la placa del Carro</Form.Label>
-        <Form.Control type="text" placeholder="Ingresa Placa" />
+    <Form className="d-flex justify-content-center flex-column rounded border border-info p-3">
+      <Form.Group className="mb-3">
+        <FloatingLabel
+          controlId="floatingPlate"
+          label="Ingresa la placa"
+          className="mb-3">
+          <Form.Control type="text" placeholder="xxx-0000" />
+        </FloatingLabel>
       </Form.Group>
-      <Button className="center" variant="primary" type="submit">
-        Submit
-      </Button>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <Button variant="primary" type="submit">
+          Registrar Vehiculo
+        </Button>
+      </div>
     </Form>
   );
 }
