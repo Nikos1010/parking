@@ -7,6 +7,7 @@ function SelectPlate({
   setSelectedPlate,
   plateError,
   registerTime = false,
+  typeFilter,
 }) {
   const [cars, setCars] = useState([]);
 
@@ -14,8 +15,8 @@ function SelectPlate({
     async function loadCars() {
       const response = await getCars();
       let FilterPlates = response.data;
-      if (registerTime) {
-        FilterPlates = filterPlate(response.data);
+      if (registerTime || typeFilter) {
+        FilterPlates = filterPlate(response.data, typeFilter);
       }
       setCars(FilterPlates);
     }

@@ -2,17 +2,19 @@ import { Button, Form, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import { registerTypeCar } from "../../api";
 import SelectPlate from "./SelectPlate";
+import { useNavigate } from "react-router-dom";
+import { PublicRoutes } from "../../models/routes";
 
 function FormRegisterType({ type }) {
+  const navigate = useNavigate();
   const [plate, setPlate] = useState("");
   const [plateError, setPlateError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(plate);
     if (plate) {
       registerTypeCar(plate, type || "No Residente");
-      setPlate("");
+      navigate(`/${PublicRoutes.HOME}`);
     } else {
       setPlateError("Debe seleccionar una placa");
     }
@@ -34,6 +36,7 @@ function FormRegisterType({ type }) {
             plateError={plateError}
             plate={plate}
             setSelectedPlate={setSelectedPlate}
+            typeFilter={type}
           />
         </Col>
         <Col>

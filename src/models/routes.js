@@ -1,6 +1,7 @@
 export const PublicRoutes = {
   HOME: "home",
-  CREATECAR: "registerCar",
+  CREATECAR: "createCar",
+  REGISTERENTRY: "registerEntryCar",
   OFICIAL: "registerOficial",
   RESIDENT: "registerResident",
   CHECKOUT: "checkoutCar",

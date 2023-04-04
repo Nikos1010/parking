@@ -40,6 +40,7 @@ export const registerTypeCar = (plate, typeCar) => {
 };
 
 export const registerCheckinCar = (plate, time) => {
+  console.log("cara.api " + time);
   axios
     .put(`${urlApi}/${plate}/entryTime`, {
       entryTime: time,
@@ -58,6 +59,31 @@ export const registerCheckoutCar = (plate, { time, typeCar = false }) => {
       departureTime: time,
       typeCar,
     })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const acumulateTimeMonth = (plate, { time = "", totalTimeMonth }) => {
+  axios
+    .put(`${urlApi}/${plate}/totalTime`, {
+      entryTime: time,
+      totalTimeMonth,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const resetMonth = () => {
+  axios
+    .put(`${urlApi}/beginMonth`)
     .then((response) => {
       console.log(response);
     })

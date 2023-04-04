@@ -1,11 +1,21 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Container, Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
 import { PublicRoutes } from "../../models/routes";
 import { Link } from "react-router-dom";
+import { resetMonth } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  const navigate = useNavigate();
+
+  const handleClickButton = () => {
+    resetMonth();
+    navigate(`/${PublicRoutes.HOME}`);
+  };
+
+  const handleClickGenerateButton = () => {
+    // resetMonth();
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -18,23 +28,22 @@ function NavBar() {
             <NavDropdown
               title="Dar de Alta Vehiculo"
               id="collasible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  replace
-                  to={PublicRoutes.OFICIAL}>
-                  Oficial
-                </Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  replace
-                  to={PublicRoutes.RESIDENT}>
-                  Residente
-                </Link>
-              </NavDropdown.Item>
+              <Link className="dropdown-item" replace to={PublicRoutes.OFICIAL}>
+                Oficial
+              </Link>
+              <Link
+                className="dropdown-item"
+                replace
+                to={PublicRoutes.RESIDENT}>
+                Residente
+              </Link>
             </NavDropdown>
+            <Link
+              className="navbar-expand-lg navbar-nav nav-link"
+              replace
+              to={PublicRoutes.REGISTERENTRY}>
+              Registrar Entrada
+            </Link>
           </Nav>
           <Nav>
             <Link
@@ -43,15 +52,12 @@ function NavBar() {
               to={PublicRoutes.CREATECAR}>
               Crear Carro
             </Link>
-            <Link
-              className="navbar-expand-lg navbar-nav nav-link"
-              replace
-              to={PublicRoutes.CREATECAR}>
+            <Button variant="outline-light" onClick={handleClickButton}>
               Comienzo mes
-            </Link>
-            <Link className="nav-link" replace to={PublicRoutes.CREATECAR}>
+            </Button>
+            <Button variant="outline-light" onClick={handleClickGenerateButton}>
               Generar Informe Residentes
-            </Link>
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

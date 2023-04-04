@@ -4,7 +4,10 @@ export const filterCars = (cars) => {
   );
 };
 
-export const filterPlate = (cars) => {
+export const filterPlate = (cars, type) => {
+  if (type) {
+    return [...cars].filter((car) => car.typeCar !== type);
+  }
   return [...cars].filter(
     (car) => !car.stayTime[0].entryTime && !car.stayTime[0].departureTime
   );

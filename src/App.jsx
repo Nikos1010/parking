@@ -6,7 +6,7 @@ import {
   FormRegisterType,
   NavBar,
 } from "./components";
-import { ErrorPage, Home } from "./pages";
+import { ErrorPage, Home, InformationCar } from "./pages";
 import { PublicRoutes } from "./models/routes";
 import { Container } from "react-bootstrap";
 
@@ -18,6 +18,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path={PublicRoutes.HOME} element={<Home />} />
+          <Route
+            path={`${PublicRoutes.HOME}/:plate`}
+            element={<InformationCar />}
+          />
+          <Route
+            path={PublicRoutes.REGISTERENTRY}
+            element={<FormRegisterCar />}
+          />
           <Route path={PublicRoutes.CREATECAR} element={<FormCreateCar />} />
           <Route
             path={PublicRoutes.OFICIAL}

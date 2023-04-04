@@ -43,7 +43,7 @@ function FormRegisterCar() {
     }
 
     if (!response) {
-      // navigation(`/${PublicRoutes.HOME}`);
+      navigation(`/${PublicRoutes.HOME}`);
     }
 
     if (isNaN(response)) {

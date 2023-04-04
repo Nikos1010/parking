@@ -1,4 +1,9 @@
-import { getCar, registerCheckoutCar } from "./cars.api";
+import {
+  acumulateTimeMonth,
+  getCar,
+  registerCheckinCar,
+  registerCheckoutCar,
+} from "./cars.api";
 
 export const amountToPay = async (plate, registerTime) => {
   const response = await getCar(plate);
@@ -11,19 +16,26 @@ export const amountToPay = async (plate, registerTime) => {
     return "La fecha de registro es menor que la fecha de entrada.";
   }
 
-  if (typeCar === "Oficial" || typeCar === "Residente") {
-    // registerCheckoutCar(plate, { time: registerTime, typeCar: true });
+  if (typeCar === "Oficial") {
+    registerCheckoutCar(plate, { time: registerTime, typeCar: true });
     return;
   }
 
-  //   registerCheckoutCar(car.plate, { time: registerTime });
-  return calculatePay(entryTime, registerTime);
+  const totalPay = calculatePay(entryTime, registerTime);
+
+  if (typeCar === "Residente") {
+    acumulateTimeMonth(plate, { totalTimeMonth: totalPay });
+    return;
+  }
+
+  registerCheckinCar(car[0].plate, "");
+  return totalPay;
 };
 
 export const calculatePay = (entryTime, departureTime) => {
   const diffInMillis = departureTime.getTime() - entryTime.getTime();
 
-  return Math.floor(diffInMillis / 60000) * 0.5;
+  return Math.floor(diffInMillis / 60000);
 };
 
 export const isValidateDateRange = (start, end) => {
