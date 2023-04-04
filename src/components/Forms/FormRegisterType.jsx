@@ -1,18 +1,17 @@
+import { Button, Form, Row, Col } from "react-bootstrap";
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { registerTypeCar } from "../../api";
 import SelectPlate from "./SelectPlate";
-import DateTime from "./DateTime";
 
-function FormRegisterCar() {
+function FormRegisterType({ type }) {
   const [plate, setPlate] = useState("");
   const [plateError, setPlateError] = useState("");
-  const [registerTime, setRegisterTime] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(plate);
     if (plate) {
-      console.log(registerTime);
+      registerTypeCar(plate, type || "No Residente");
       setPlate("");
     } else {
       setPlateError("Debe seleccionar una placa");
@@ -24,29 +23,31 @@ function FormRegisterCar() {
     setPlateError(null);
   };
 
-  const setDateTime = (dateTime) => {
-    setRegisterTime(dateTime);
-  };
-
   return (
     <Form
       onSubmit={handleSubmit}
       className="d-flex justify-content-center flex-column rounded border border-info p-3">
-      <h3 className="text-center text-primary mb-3">Registrar Entrada</h3>
-      <Form.Group className="mb-3">
-        <SelectPlate
-          plate={plate}
-          setSelectedPlate={setSelectedPlate}
-          plateError={plateError}
-        />
-      </Form.Group>
-      <DateTime setDateTime={setDateTime} />
+      <h3 className="text-center text-primary mb-3">Registrar Vehiculo</h3>
+      <Row>
+        <Col>
+          <SelectPlate
+            plateError={plateError}
+            plate={plate}
+            setSelectedPlate={setSelectedPlate}
+          />
+        </Col>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Control placeholder={type} disabled />
+          </Form.Group>
+        </Col>
+      </Row>
       <div className="d-grid gap-2 col-6 mx-auto">
         <Button variant="primary" type="submit">
-          Registrar Entrada
+          Dar de alta Vehiculo {type}
         </Button>
       </div>
     </Form>
   );
 }
-export default FormRegisterCar;
+export default FormRegisterType;

@@ -1,17 +1,46 @@
 import { Button, Form, FloatingLabel } from "react-bootstrap";
+import { useState } from "react";
+import { createCar } from "../../api";
 
 function FormCreateCar() {
+  const [plate, setPlate] = useState("");
+  const [plateError, setPlateError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const plateRegex = /^[A-Z]{3}-\d{5}$/;
+    if (plateRegex.test(plate)) {
+      createCar(plate);
+      setPlate("");
+      setPlateError("");
+    } else {
+      setPlateError("Ejemplo de la placa: AWS-12345");
+    }
+  };
+
   return (
-    <Form className="d-flex justify-content-center flex-column rounded border border-info p-3">
+    <Form
+      onSubmit={handleSubmit}
+      className="d-flex justify-content-center flex-column rounded border border-info p-3">
+      <h3 className="text-center text-primary mb-3">Registrar Vehiculo</h3>
       <Form.Group className="mb-3">
         <FloatingLabel
           controlId="floatingPlate"
           label="Ingresa la placa"
           className="mb-3">
-          <Form.Control type="text" placeholder="xxx-0000" />
+          <Form.Control
+            type="text"
+            placeholder="xxx-0000"
+            onChange={(e) => setPlate(e.target.value)}
+            value={plate}
+            style={{ borderColor: plateError ? "red" : "" }}
+          />
+          {plateError ? (
+            <Form.Text className="text-danger">{plateError}</Form.Text>
+          ) : null}
         </FloatingLabel>
       </Form.Group>
-      <div class="d-grid gap-2 col-6 mx-auto">
+      <div className="d-grid gap-2 col-6 mx-auto">
         <Button variant="primary" type="submit">
           Registrar Vehiculo
         </Button>

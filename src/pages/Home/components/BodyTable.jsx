@@ -6,7 +6,7 @@ function BodyTable({ cars }) {
       {cars.map((car) => (
         <tr key={car.plate}>
           <td>{car.plate}</td>
-          <td>{car.date}</td>
+          <td>any</td>
           <td>
             <BsFillCalendar2CheckFill />
           </td>
