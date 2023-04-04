@@ -52,10 +52,11 @@ export const registerCheckinCar = (plate, time) => {
     });
 };
 
-export const registerCheckoutCar = (plate, time) => {
+export const registerCheckoutCar = (plate, { time, typeCar = false }) => {
   axios
     .put(`${urlApi}/${plate}/departureTime`, {
       departureTime: time,
+      typeCar,
     })
     .then((response) => {
       console.log(response);
