@@ -4,19 +4,19 @@ import ContentTable from "./components/ContentTable";
 import { useState } from "react";
 
 function Home() {
-  const [cars, setCars] = useState([]);
+  const [updateCars, setUpdateCars] = useState(false);
 
-  const handleAddCar = (newCar) => {
-    setCars([...cars, newCar]);
+  const handleUpdateCars = () => {
+    setUpdateCars(!updateCars);
   };
 
   return (
     <>
       <Row>
-        <FormRegisterCar addCar={handleAddCar} />
+        <FormRegisterCar onUpdateCars={handleUpdateCars} />
       </Row>
       <Row className="my-4">
-        <ContentTable cars={cars} />
+        <ContentTable updateCars={updateCars} />
       </Row>
     </>
   );

@@ -3,4 +3,5 @@ export const PublicRoutes = {
   CREATECAR: "registerCar",
   OFICIAL: "registerOficial",
   RESIDENT: "registerResident",
+  CHECKOUT: "checkoutCar",
 };

@@ -1,14 +1,23 @@
 import { Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { getCars } from "../../api";
+import { filterPlate, getCars } from "../../api";
 
-function SelectPlate({ plate, setSelectedPlate, plateError }) {
+function SelectPlate({
+  plate,
+  setSelectedPlate,
+  plateError,
+  registerTime = false,
+}) {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
     async function loadCars() {
       const response = await getCars();
-      setCars(response.data);
+      let FilterPlates = response.data;
+      if (registerTime) {
+        FilterPlates = filterPlate(response.data);
+      }
+      setCars(FilterPlates);
     }
     loadCars();
   }, []);

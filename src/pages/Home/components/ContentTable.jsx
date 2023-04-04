@@ -1,18 +1,20 @@
 import { Table } from "react-bootstrap";
-import { getCars } from "../../../api";
+import { filterCars, getCars } from "../../../api";
 import { useEffect, useState } from "react";
 import BodyTable from "./BodyTable";
 
-function ContentTable() {
+function ContentTable({ updateCars }) {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
     async function loadCars() {
       const response = await getCars();
-      setCars(response.data);
+      const FilterCars = filterCars(response.data);
+      setCars(FilterCars);
     }
     loadCars();
-  }, []);
+  }, [updateCars]);
+
   return (
     <Table striped bordered hover variant="dark" className="text-center">
       <thead>
@@ -24,7 +26,9 @@ function ContentTable() {
         </tr>
       </thead>
       <tbody>
-        <BodyTable cars={cars} />
+        {cars.map((car) => (
+          <BodyTable key={car.plate} car={car} />
+        ))}
       </tbody>
     </Table>
   );

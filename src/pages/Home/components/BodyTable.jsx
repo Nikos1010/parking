@@ -1,18 +1,20 @@
 import { BsFillCalendar2CheckFill } from "react-icons/bs";
+import { PublicRoutes } from "../../../models/routes";
+import { Link } from "react-router-dom";
 
-function BodyTable({ cars }) {
+function BodyTable({ car }) {
   return (
     <>
-      {cars.map((car) => (
-        <tr key={car.plate}>
-          <td>{car.plate}</td>
-          <td>any</td>
-          <td>
+      <tr>
+        <td>{car.plate}</td>
+        <td>{car.stayTime[0].entryTime}</td>
+        <td>
+          <Link replace to={`/${PublicRoutes.CHECKOUT}/${car.plate}`}>
             <BsFillCalendar2CheckFill />
-          </td>
-          <td>{car.typeCar}</td>
-        </tr>
-      ))}
+          </Link>
+        </td>
+        <td>{car.typeCar}</td>
+      </tr>
     </>
   );
 }

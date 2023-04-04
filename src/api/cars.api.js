@@ -7,6 +7,12 @@ export const createCar = (plate) => {
     .post(urlApi, {
       plate,
       typeCar: "No Residente",
+      stayTime: [
+        {
+          entryTime: "",
+          departureTime: "",
+        },
+      ],
     })
     .then((response) => {
       console.log(response);
@@ -35,13 +41,21 @@ export const registerTypeCar = (plate, typeCar) => {
 
 export const registerCheckinCar = (plate, time) => {
   axios
-    .put(`${urlApi}/${plate}`, {
-      stayTime: [
-        {
-          entryTime: time,
-          departureTime: "",
-        },
-      ],
+    .put(`${urlApi}/${plate}/entryTime`, {
+      entryTime: time,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const registerCheckoutCar = (plate, time) => {
+  axios
+    .put(`${urlApi}/${plate}/departureTime`, {
+      departureTime: time,
     })
     .then((response) => {
       console.log(response);
