@@ -12,3 +12,9 @@ export const filterPlate = (cars, type) => {
     (car) => !car.stayTime[0].entryTime && !car.stayTime[0].departureTime
   );
 };
+
+export const filterResidentCars = (cars) => {
+  return [...cars].filter(
+    (car) => car.typeCar === "Residente" && car.totalTimeMonth
+  );
+};

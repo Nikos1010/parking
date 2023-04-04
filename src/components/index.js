@@ -1,6 +1,9 @@
+export { default as DateTime } from "./Forms/DateTime";
 export { default as FormCreateCar } from "./Forms/FormCreateCar";
 export { default as FormRegisterCar } from "./Forms/FormRegisterCar";
 export { default as FormRegisterType } from "./Forms/FormRegisterType";
+export { default as InfoModal } from "./Forms/InfoModal";
+export { default as PaymentModal } from "./Forms/PaymentModal";
 export { default as SelectPlate } from "./Forms/SelectPlate";
 export { default as NavBar } from "./NavBar/NavBar";
 export { default as ShowError } from "./ShowError/ShowError";
